@@ -1,0 +1,17 @@
+# NOTE: opencv-python is deliberately NOT listed here. mediapipe already
+# depends on opencv-contrib-python (a superset that provides the same cv2
+# module). Installing opencv-python *as well* puts two separate native cv2
+# builds in the same environment, which is a known cause of segfaults on
+# import.
+
+# NOTE: mediapipe is pinned to an exact older version on purpose. Newer
+# mediapipe (0.10.35+, and the 1.0.x line) removed the legacy
+# `mediapipe.solutions` API this game uses, and separately, mediapipe's
+# newer Tasks API graphs have a real bug on some Macs where a GPU/Metal
+# helper crashes at the native level even when CPU delegate is requested.
+# 0.10.14 still has `mediapipe.solutions`, is CPU-only under the hood for
+# this use case, and is the version almost all hand-tracking tutorials are
+# built on -- extremely battle-tested. Don't casually bump this version.
+mediapipe==0.10.14
+notebook
+ipykernel
